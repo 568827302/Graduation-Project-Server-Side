@@ -10,8 +10,14 @@
           http://www.springframework.org/schema/context/spring-context-4.1.xsd
           http://www.springframework.org/schema/mvc
           http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+    <!-- 自动扫描包名 -->
     <context:component-scan base-package="com.heli.serverside" />
+    <!-- 使用默认的注解映射 -->
     <mvc:annotation-driven />
+
+    <!-- 使用<mvc:default-servlet-handler />标签能解决
+        web.xml内DispatchedServlet的<url-pattern>为 / 时，
+        静态资源（.css,.js,.jpg等）被拦截的问题 -->
     <mvc:default-servlet-handler />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -20,6 +26,9 @@
         </property>
         <property name="suffix">
             <value>.jsp</value>
+        </property>
+        <property name="viewClass">
+            <value>org.springframework.web.servlet.view.JstlView</value>
         </property>
     </bean>
 </beans>
